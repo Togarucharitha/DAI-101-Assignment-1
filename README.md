@@ -110,62 +110,82 @@ Steps Performed
 
 1. Data Cleaning
 
-Checked for missing values:
+Load the dataset and inspect its structure:
 
-society column had significant missing values (~41%).
+The dataset was loaded using Pandas, and its structure was examined using .info() and .head().
 
-balcony, bath, size, and location had minor missing values.
+Handle missing values:
 
-Handling missing data :
-By removing and replacing with most frequent data
+The society column had ~41% missing values, which were dropped due to high sparsity.
 
-Checked for duplicate records:
+Minor missing values in balcony, bath, size, and location were imputed using mode or median.
 
-Found and removed duplicate entries.
+Identify and remove duplicate records:
 
-Handled inconsistent data formats:
+Duplicate rows were detected and removed to ensure data integrity.
 
-size contained values like "2 BHK" and "4 Bedroom", which were standardized.
+Detect and treat outliers:
 
-total_sqft had range values (e.g., "1200 - 1500"), requiring conversion to numeric.
+The price and bath columns had extreme values (e.g., properties with 40 bathrooms), which were handled using interquartile range (IQR) and capping methods.
 
-total_sqft had values in sq.meters, sq.yards which are to be converted into sq.ft.
+Standardize categorical values:
 
-Identified and handled outliers:
+size values (e.g., "2 BHK" and "4 Bedroom") were standardized.
 
-bathroom count showed extreme values (max = 40), requiring further validation.
-
-price column had a wide range, needing further investigation.
+total_sqft values that contained ranges (e.g., "1200 - 1500") were converted to numeric averages.
 
 2. Exploratory Data Analysis (EDA)
 
-Summary Statistics:
+Univariate Analysis (Single-Variable Exploration)
 
-Displayed key statistics such as mean, median, min, and max for numerical columns.
+Summary statistics:
 
-Identified key trends in the dataset.
+The average price is 112.57 lakh INR, with a wide standard deviation of 148.97 lakh INR.
 
-Categorical Analysis:
+The average number of bathrooms is 2.69, but extreme values were observed.
 
-location had 1,305 unique values, indicating a diverse dataset.
+Frequency distributions for categorical variables:
 
-area_type had 4 unique values.
+The dataset contains 1,305 unique locations and 4 area types.
 
-Price Distribution:
+Histograms and box plots:
 
-The price ranged from 8 lakh INR to 3600 lakh INR, suggesting potential outliers.
+Price and bathroom distributions revealed skewed data, requiring transformations.
 
-Bathroom Analysis:
+Bivariate Analysis (Two-Variable Exploration)
 
-Most properties had 2 to 3 bathrooms, but extreme values (40) were detected.
+Correlation matrix:
 
-Next Steps
+price and total_sqft showed a strong positive correlation.
 
-Handle outliers in price and bathroom columns.
+Scatter plots for numerical relationships:
 
-Convert non-numeric fields into standardized formats.
+price vs. total_sqft displayed a non-linear trend with outliers.
 
-Perform deeper analysis on price per square foot trends.
+Box plots and violin plots:
 
-Visualize key trends using histograms, boxplots, and scatter plots.
+Properties with more bedrooms had higher median prices but greater variability.
 
+Multivariate Analysis (Multiple Variables Exploration)
+
+Pair plots:
+
+Relationships among price, total_sqft, and bathrooms were analyzed for patterns.
+
+Heatmaps:
+
+A correlation heatmap visualized strong associations among numerical features.
+
+Grouped comparisons:
+
+Properties in premium locations exhibited significantly higher prices.
+
+Key Observations
+
+Price distribution is highly skewed, with a few extreme high-value properties influencing the mean.
+
+Number of bathrooms and price are correlated, but extreme values (e.g., 40 bathrooms) distort trends.
+
+Location has a major impact on price, with certain high-demand areas showing much higher median prices.
+
+Total square footage is not always directly proportional to price, indicating other influential factors like amenities and location.
